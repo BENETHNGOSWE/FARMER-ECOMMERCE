@@ -18,28 +18,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'age',
-        'sex',
-        'location',
-        'phonenumber',
-        'image',
-        'country',
-
-    ];
+    protected $fillable = ['name', 'email', 'password', 'age', 'sex', 'location', 'phonenumber', 'image', 'country'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
@@ -50,4 +36,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function mazaos()
+    {
+        return $this->hasMany(Mazao::class);
+    }
 }

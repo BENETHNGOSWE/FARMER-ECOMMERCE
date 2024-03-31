@@ -33,16 +33,26 @@ class UserRolePermissionSeeder extends Seeder
          Permission::create(['name' => 'update user']);
          Permission::create(['name' => 'delete user']);
  
-         Permission::create(['name' => 'view product']);
-         Permission::create(['name' => 'create product']);
-         Permission::create(['name' => 'update product']);
-         Permission::create(['name' => 'delete product']);
+         Permission::create(['name' => 'view mazao']);
+         Permission::create(['name' => 'create mazao']);
+         Permission::create(['name' => 'update mazao']);
+         Permission::create(['name' => 'delete mazao']);
+
+         Permission::create(['name' => 'view pembejeo']);
+         Permission::create(['name' => 'create pembejeo']);
+         Permission::create(['name' => 'update pembejeo']);
+         Permission::create(['name' => 'delete pembejeo']);
+
+         Permission::create(['name' => 'view beizamazao']);
+         Permission::create(['name' => 'create beizamazao']);
+         Permission::create(['name' => 'update beizamazao']);
+         Permission::create(['name' => 'delete beizamazao']);
  
  
          // Create Roles
          $superAdminRole = Role::create(['name' => 'super-admin']); //as super-admin
          $adminRole = Role::create(['name' => 'admin']);
-         $staffRole = Role::create(['name' => 'staff']);
+         $mkulimaRole = Role::create(['name' => 'mkulima']);
          $userRole = Role::create(['name' => 'user']);
  
          // Lets give all permission to super-admin role.
@@ -54,7 +64,18 @@ class UserRolePermissionSeeder extends Seeder
          $adminRole->givePermissionTo(['create role', 'view role', 'update role']);
          $adminRole->givePermissionTo(['create permission', 'view permission']);
          $adminRole->givePermissionTo(['create user', 'view user', 'update user']);
-         $adminRole->givePermissionTo(['create product', 'view product', 'update product']);
+         $adminRole->givePermissionTo(['create mazao', 'view mazao', 'update mazao']);
+         $adminRole->givePermissionTo(['view beizamazao']);
+         $adminRole->givePermissionTo(['create pembejeo', 'view pembejeo', 'update pembejeo', 'delete pembejeo']);
+
+
+
+          // Lets give few permissions to mkulima role.
+        $mkulimaRole->givePermissionTo(['view mazao', 'update mazao', 'create mazao']);
+        $mkulimaRole->givePermissionTo(['view user','update user']);
+        $mkulimaRole->givePermissionTo(['view beizamazao']);
+        $mkulimaRole->givePermissionTo(['view pembejeo']);
+
  
  
          // Let's Create User and assign Role to it.
@@ -81,15 +102,15 @@ class UserRolePermissionSeeder extends Seeder
          $adminUser->assignRole($adminRole);
  
  
-         $staffUser = User::firstOrCreate([
-                             'email' => 'staff@gmail.com',
+         $mkulimaUser = User::firstOrCreate([
+                             'email' => 'mkulima@gmail.com',
                          ], [
-                             'name' => 'Staff',
-                             'email' => 'staff@gmail.com',
+                             'name' => 'mkulima',
+                             'email' => 'mkulima@gmail.com',
                              'password' => Hash::make('12345678'),
                          ]);
  
-         $staffUser->assignRole($staffRole);
+         $mkulimaUser->assignRole($mkulimaRole);
      }
     
 }

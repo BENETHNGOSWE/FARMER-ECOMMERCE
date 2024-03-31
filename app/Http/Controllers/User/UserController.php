@@ -20,7 +20,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::get();
+        if (auth()->user()->hasRole(['super-admin'])) {
+            // If so, retrieve all users
+            $users = User::get();
+        } else {
+            // Otherwise, retrieve only the logged-in user's details
+            $users = [auth()->user()];
+        };
         return view('role-permission.user.index', ['users' => $users]);
     }
 

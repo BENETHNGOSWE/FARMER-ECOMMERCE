@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('mazao_maelezo');
             $table->string('mazao_bei');
             $table->string('mazao_picha');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

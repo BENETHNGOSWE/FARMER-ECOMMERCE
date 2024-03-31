@@ -10,8 +10,17 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
+                    <div class="mt-4">
+                        <x-input-label for="age" :value="__('Age')" />
+                        <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" :value="old('age', $user->age)" />
+                        <x-input-error :messages="$errors->get('age')" class="mt-2" />
+                    </div>
+        
                 </div>
+                
             </div>
+
+            
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">

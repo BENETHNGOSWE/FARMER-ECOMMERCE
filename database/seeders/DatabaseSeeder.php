@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use Spatie\Permission\Models\Role;
+use App\Models\Makundiyamazao;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(UserRolePermissionSeeder::class);
+        $this->call(makundiyamazaoSeeder::class);
     }
 }

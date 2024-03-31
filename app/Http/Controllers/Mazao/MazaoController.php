@@ -6,40 +6,41 @@ use App\Http\Controllers\Controller;
 use App\Models\Mazao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class MazaoController extends Controller
 {
     protected $data = [];
     public function __construct()
     {
-        // $this->middleware('permission:view product', ['only' => ['index']]);
-        // $this->middleware('permission:create product', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:update product', ['only' => ['update', 'edit']]);
-        // $this->middleware('permission:delete product', ['only' => ['destroy']]);
-        $this->data['mazao'] = Mazao::all();
+        $this->middleware('permission:view mazao', ['only' => ['index']]);
+        $this->middleware('permission:create mazao', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update mazao', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete mazao', ['only' => ['destroy']]);
+        // $this->data['mazaos'] = Mazao::all();
     }
 
     public function index()
     {
-        // Get the total count of mazao
-        $totalmazao = $mazao->count();
-
-        return view('mazao.index', ['totalmazao' => $totalmazao]);
+        if(auth()->user()->hasRole('super-admin')){
+            $this->data['mazaos'] = Mazao::all();
+        }else{
+            $this->data['mazaos'] = auth()->user()->mazaos;
+        }
+        return view('mazao.index',$this->data);
     }
 
     public function create()
     {
-        $this->data['mazao'] = Mazao::all();
         return view('mazao.create', $this->data);
     }
 
     public function validate_mazao(Request $request)
     {
         return $request->validate([
-            'mazao_jina' => 'required',
-            'mazao_maelezo' => 'required',
-            'mazao_bei' => 'required',
-            'mazao_picha' => 'required',
+            'mazao_jina' => 'sometimes|required',
+            'mazao_maelezo' => 'sometimes|required',
+            'mazao_bei' => 'sometimes|required',
         ]);
         
     }
@@ -58,15 +59,16 @@ class MazaoController extends Controller
                 $validate['mazao_picha'] = $file_name;
             }
             $mazao->fill($validate);
+            $mazao->user_id = auth()->user()->id;
             $mazao->save();
             DB::commit();
-            return view('mazao.index');
 
         } catch (\Throwable $th) {
             DB::rollBack();
             \Log::error($th->getMessage() . '' . $th->getTraceAsString());
             return back()->with('error', $th->getMessage());
         }
+        return to_route('mazao.index');
     }
 
     public function edit(Request $request, Mazao $mazao)
@@ -89,11 +91,10 @@ class MazaoController extends Controller
                 }
                 $file_name = time() . '.' . request()->mazao_picha->getClientOriginalExtension();
                 request()->mazao_picha->move(public_path('images'), $file_name);
-                $mazao->mazao_picha = $file_name;
+                $validate['mazao_picha'] = $file_name;
             }
 
-            $mazao->fill($validate);
-            $mazao->save();
+            $mazao->update($validate);
             DB::commit();
 
         } catch (\Throwable $th) {
