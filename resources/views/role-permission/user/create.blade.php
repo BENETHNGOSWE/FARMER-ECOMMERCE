@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="white-box">
-                    <h3 class="box-title">Register Company Distributor</h3>
+                    <h3 class="box-title">Register Users</h3>
                 </div>
             </div>
         </div>

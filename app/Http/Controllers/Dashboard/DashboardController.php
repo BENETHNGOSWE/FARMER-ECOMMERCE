@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $this->middleware('permission:update mazao', ['only' => ['update', 'edit']]);
         $this->middleware('permission:delete mazao', ['only' => ['destroy']]);
         // $this->data['mazaos'] = Mazao::all();
-        // $this->date['pembejeos'] = Pembejeozakilimo::all();
+        $this->data['pembejeos'] = Pembejeozakilimo::all();
         $this->data['beizamazaos'] = Beizamazao::all();
         
     }

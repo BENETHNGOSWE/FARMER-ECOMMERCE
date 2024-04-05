@@ -44,23 +44,17 @@
                     </a>
                 </li>
                 <hr>
-                <h5 style="margin-left: 2em"><strong> Manage Product </strong></h5>
+                <h5 style="margin-left: 2em"><strong> Manage Users </strong></h5>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.create')}}" aria-expanded="false">
                         <i class="fa fa-font" aria-hidden="true"></i>
-                        <span class="hide-menu">Register Product</span>
+                        <span class="hide-menu">Register User</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index')}}" aria-expanded="false">
                         <i class="fa fa-globe" aria-hidden="true"></i>
-                        <span class="hide-menu">View Your Product</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        <span class="hide-menu">Fake Product Reported</span>
+                        <span class="hide-menu">View Users</span>
                     </a>
                 </li>
                 <hr>

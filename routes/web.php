@@ -65,4 +65,8 @@ Route::group(['middleware' => ['role:super-admin|admin|mkulima|user']], function
 Route::get('dashboard', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name('dashboard');
 Route::get('/', [App\Http\Controllers\Dashboard\DashboardController::class, 'indexfront'])->name('homepage');
 
+
+Route::get('chat', [App\Http\Controllers\Message\MessageController::class, 'index'])->name('chat.index');
+Route::post('chat/send-message', [App\Http\Controllers\Message\MessageController::class, 'sendMessage'])->name('chat.send-message');
+
 require __DIR__ . '/auth.php';

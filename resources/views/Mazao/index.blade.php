@@ -13,7 +13,7 @@
             <table class="table table-striped mt-2">
                 <thead>
                     <tr>
-                        {{-- <th>ID</th> --}}
+                        <th>No</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>

@@ -44,7 +44,7 @@
                         <span class="hide-menu">View Your Profile</span>
                     </a>
                 </li>
-
+                <hr>
                 <li class="sidebar-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
